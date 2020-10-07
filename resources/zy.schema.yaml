@@ -1,0 +1,103 @@
+# 拼音输入法
+
+schema:
+  schema_id:  zy # 代码中的内部名称
+  name:  zy # 方案的展示名称
+  author:  
+    -  "發明人 朱邦復先生、沈紅蓮女士"
+    -  "苑忠诚"
+  version:  "4.0.3"
+  description:
+    拼音输入法，尽可能的符合个人使用习惯，加入搜狗词库
+  
+switches:
+  -  name:  ascii_mode
+     reset:  0
+     states:  [  中文,英文  ]
+  -  name:  full_shape
+     reset:  0
+     states:  [  半角,全角  ]
+  -  name:  my_zh_simp
+     reset:  1
+     states:  [  漢字,汉字  ]
+     
+engine:
+  processors:
+    # 1.2版本加入的-  fluid_editor # 将字符按键记入输入上下文，将输入法连缀成一串
+    -  ascii_composer # 处理英文模式及中英文切换
+    -  recognizer  #  与 matcher 搭配，处理符合特定规则的输入码，如网址、反查等
+    -  key_binder  # 在特定条件下将按键绑定到其他按键，如重定义逗号、句号为候选翻页键
+    -  speller # 1.3版本加入 把字母追加到编码串
+    -  punctuator # 处理符号按键
+    -  selector # 1.5版本加入 选字和换页功能
+    -  navigator # 移动插入点
+    -  express_editor # 1.3版本加入 空格确认当前输入，其他字符直接上屏
+  segmentors:
+    -  ascii_segmentor
+    -  matcher
+    -  abc_segmentor # 1.4版本加入 标记输入码的类型
+    -  punct_segmentor # 割界，与前后方的其他编码区分开
+    -  fallback_segmentor  # 1.2版本加入的
+  translators:
+    -  echo_translator # 没有其他结果时，创建一个与编码串一样的候选项
+    -  punct_translator # 转换标点符号
+    -  script_translator # 脚本表转换
+   # -  reverse_lookup_translator # 反查翻译器？不知道有锤子用
+  filters:
+    -  simplifier # 简繁转换
+    -  uniquifier # 过滤重复的候选字，有可能来自简繁转换
+    
+translator:
+  dictionary:  my_dictionary # 设定table_translator使用的词典名
+  enable_encoder:  true
+  enable_completion:  true
+  enable_sentence:  true
+  enable_user_dict:  true
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+    
+punctuator: # 设定符号表，这里直接导入预设的
+  import_preset: default
+  
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - erase/^xx$/
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([zcs]h).+$/$1/
+    - derive/^([nl])ve$/$1ue/
+    - derive/^([jqxy])u/$1v/
+    - derive/un$/uen/
+    - derive/ui$/uei/
+    - derive/iu$/iou/
+    - derive/([aeiou])ng$/$1gn/
+    - derive/([dtngkhrzcs])o(u|ng)$/$1o/
+    - derive/ong$/on/
+    - derive/ao$/oa/
+    - derive/([iu])a(o|ng?)$/a$1$2/
+    
+
+custom_phrase:
+  dictionary: ""
+  user_dict: my_dict
+  db_class: stabledb
+  initial_quality: 1
+
+simplifier:
+  option_name: my_zh_simp
+  opencc_config:  t2s.json
+  tags:  [  abc  ]
+  tips:  none
+
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: always, accept: Control+Shift+4, toggle: zh_simp }
+    - { when: always, accept: Control+Shift+dollar, toggle: zh_simp }
+
+recognizer:
+  import_preset: default
