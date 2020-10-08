@@ -8,7 +8,7 @@ use_preset_vocabulary:  true
 import_tables:
   -  luna_pinyin
 ...
-QQ	q	q	1
+Q	q	1
 发财	fa	cai	1
 阿卡丽	a ka li	1
 阿狸	a li	1
