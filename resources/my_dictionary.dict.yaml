@@ -2,12 +2,13 @@
 
 ---
 name:  my_dictionary
-version:  "4.0.2"
+version:  "4.0.5"
 sort:  by_weight
 use_preset_vocabulary:  true
 import_tables:
   -  luna_pinyin
 ...
+下	xai	1
 Q	q	1
 发财	fa	cai	1
 阿卡丽	a ka li	1

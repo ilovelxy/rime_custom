@@ -6,18 +6,21 @@ schema:
   author:  
     -  "發明人 朱邦復先生、沈紅蓮女士"
     -  "苑忠诚"
-  version:  "4.0.3"
+  version:  "4.0.107"
   description:
     拼音输入法，尽可能的符合个人使用习惯，加入搜狗词库
   
 switches:
-  -  name:  ascii_mode
+  -  name:  ascii_mode # 中英文切换开关
      reset:  0
      states:  [  中文,英文  ]
-  -  name:  full_shape
+  -  name:  full_shape # 全角半角切换开关
      reset:  0
      states:  [  半角,全角  ]
-  -  name:  my_zh_simp
+  -  name:  ascii_punct # 中西文切换开关
+     reset:  0
+     states:  [  中文标点,英文标点  ]
+  -  name:  simplification
      reset:  1
      states:  [  漢字,汉字  ]
      
@@ -49,22 +52,29 @@ engine:
     
 translator:
   dictionary:  my_dictionary # 设定table_translator使用的词典名
-  enable_encoder:  true
-  enable_completion:  true
-  enable_sentence:  true
-  enable_user_dict:  true
-  preedit_format:
-    - xform/([nl])v/$1ü/
-    - xform/([nl])ue/$1üe/
-    - xform/([jqxy])v/$1u/
+  enable_encoder:  true # 开启自动造词
+  enable_completion:  true # 提前显示尚未输入完整码的字
+  enable_sentence:  true # 是否开启自动造句
+  enable_user_dict:  true # 开启用户词典〔用户词典记录动态字词频、用户词〕
+  preedit_format: # 上屏码自定义
+    - xform/([nl])v/$1ü/ # 拼音状态下输入nv实际显示nü
+    - xform/([nl])ue/$1üe/ # n或者l后面紧跟着输入ue显示üe
+    - xform/([jqxy])v/$1u/ # j q x y 后面紧跟着输入v 实际显示u
     
 punctuator: # 设定符号表，这里直接导入预设的
-  import_preset: default
+  import_preset: default # 引入default.yaml中自定义的符号表
+  half_shape: # 修改几个按键的定义 符合用户的使用习惯 达到和主流输入法效果相同的效果
+    "/": "、"
+    "[": "【"
+    "\\": "、"
+    "]": "】"
+    "{": "｛"
+    "}": "｝"
   
 speller:
-  alphabet: zyxwvutsrqponmlkjihgfedcba
+  alphabet: qwertyuiopasdfghjklzxcvbnm # 输入范围
   delimiter: " '"
-  algebra:
+  algebra: # 拼音运算规则 我也不懂 照抄的作者的代码
     - erase/^xx$/
     - abbrev/^([a-z]).+$/$1/
     - abbrev/^([zcs]h).+$/$1/
@@ -79,25 +89,23 @@ speller:
     - derive/ao$/oa/
     - derive/([iu])a(o|ng?)$/a$1$2/
     
+    
 
-custom_phrase:
+custom_phrase: # 用户词典位置
   dictionary: ""
-  user_dict: my_dict
+  user_dict: my_dict # 用户词典名称 可以在build文件夹下看到一个my_dict.userdb.txt文件，里面就是按照用户的输入习惯形成的词库
   db_class: stabledb
   initial_quality: 1
 
 simplifier:
-  option_name: my_zh_simp
-  opencc_config:  t2s.json
-  tags:  [  abc  ]
+  option_name: simplification # 繁体转换为简体
+  opencc_config:  t2s.json # 转换工具
+  tags:  [  abc  ] # 转换文字段
   tips:  none
 
 
 key_binder:
-  import_preset: default
-  bindings:
-    - { when: always, accept: Control+Shift+4, toggle: zh_simp }
-    - { when: always, accept: Control+Shift+dollar, toggle: zh_simp }
+  import_preset: default # 引入按键绑定
 
 recognizer:
   import_preset: default
