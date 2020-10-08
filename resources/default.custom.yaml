@@ -8,3 +8,8 @@ patch:
   schema_list:
     - {schema: zy}
   "menu/page_size":  7
+  "switcher/caption":  "输入法设定"
+  "switcher/save_options":
+    - full_shape
+    - ascii_punct
+    - simplification
