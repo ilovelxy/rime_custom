@@ -51,6 +51,10 @@ rime输入法是一款优秀的、跨平台、开源、可高度定制、无任�
 
 ![](./Screenshots/use_26.png)
 
+最重要的一点，可以自定义输入习惯：
+
+![](./Screenshots/1.gif)
+
 ---
 
 至于更详细的说明，请见[README.old.md](./README.old.md)文件说明。
