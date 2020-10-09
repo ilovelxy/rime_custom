@@ -5,8 +5,8 @@ schema:
   name:  zy # 方案的展示名称
   author:  
     -  "發明人 朱邦復先生、沈紅蓮女士"
-    -  "苑忠诚"
-  version:  "4.0.150"
+    -  "zy <yzc35326@gmail.com>"
+  version:  "4.0.152"
   description:
     拼音输入法，尽可能的符合个人使用习惯，加入50W条左右的词库
   
@@ -294,6 +294,7 @@ speller:
     - derive/ui$/uei/
     - derive/iu$/iou/
     - derive/([ei])ng$/$1n/
+    - derive/([ei])n$/$1ng/
     #- derive/([ei])
     - derive/([aeiou])ng$/$1gn/
     - derive/([dtngkhrzcs])o(u|ng)$/$1o/
