@@ -6,9 +6,9 @@ schema:
   author:  
     -  "發明人 朱邦復先生、沈紅蓮女士"
     -  "苑忠诚"
-  version:  "4.0.135"
+  version:  "4.0.150"
   description:
-    拼音输入法，尽可能的符合个人使用习惯，加入搜狗词库
+    拼音输入法，尽可能的符合个人使用习惯，加入50W条左右的词库
   
 switches:
   -  name:  ascii_mode # 中英文切换开关
@@ -273,13 +273,18 @@ punctuator: # 设定符号表，这里直接导入预设的
     "]": "】"
     "{": "｛"
     "}": "｝"
-  
+    "#": "#"
+    "=": "="
+    ">": "》"
+    "<": "《"
+    "`": "`"
   
  
 speller:
   alphabet: qwertyuiopasdfghjklzxcvbnm # 输入范围
   delimiter: " '"
   algebra: # 拼音运算规则 我也不懂 照抄的作者的代码
+    # - xlit/a/i/
     - erase/^xx$/
     - abbrev/^([a-z]).+$/$1/
     - abbrev/^([zcs]h).+$/$1/
@@ -288,12 +293,14 @@ speller:
     - derive/un$/uen/
     - derive/ui$/uei/
     - derive/iu$/iou/
+    - derive/([ei])ng$/$1n/
+    #- derive/([ei])
     - derive/([aeiou])ng$/$1gn/
     - derive/([dtngkhrzcs])o(u|ng)$/$1o/
     - derive/ong$/on/
     - derive/ao$/oa/
     - derive/([iu])a(o|ng?)$/a$1$2/
-    - derive/ia$/ai/
+    - derive/ia/ai/
     
 custom_phrase: # 用户词典位置
   dictionary: ""
