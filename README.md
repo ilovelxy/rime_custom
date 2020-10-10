@@ -1,5 +1,9 @@
 # rime_custom
 
+#### 写在前面
+
+基于某种不可抗力的影响，如果本篇文档无法正常显示，可参见[pdf文档](README.pdf)
+
 #### 关于rime输入法（小狼毫输入法）
 
 rime输入法是一款优秀的、跨平台、开源、可高度定制、无任何广告、速度快、所有用户数据都储存在本地 的输入法，支持`Windows`,`macOS`,`Linux`,`Android`平台。
@@ -14,15 +18,15 @@ rime输入法是一款优秀的、跨平台、开源、可高度定制、无任�
 
    ![主页](./Screenshots/homepage.png)
 
-   ![](./ScreenShots/install_1.png)
+   ![](./Screenshots/install_1.png)
 
-   ![](./ScreenShots/install_2.png)
+   ![](./Screenshots/install_2.png)
 
-   ![](./ScreenShots/install_3.png)
+   ![](./Screenshots/install_3.png)
 
-   ![](./ScreenShots/install_4.png)
+   ![](./Screenshots/install_4.png)
 
-   ![](./ScreenShots/install_5.png)
+   ![](./Screenshots/install_5.png)
 
 2. 将本项目`resources` 文件夹下的4个后缀名是`.yaml`的文件放到程序的“用户文件夹”内。
 
@@ -56,5 +60,11 @@ rime输入法是一款优秀的、跨平台、开源、可高度定制、无任�
 ![](./Screenshots/1.gif)
 
 ---
+
+![](./Screenshots/2.gif)
+
+解释：由于本人经常打“xiazai”的时候打成"xaizai" 所以定义了ia=ai
+
+另外 en = eng eng = en
 
 至于更详细的说明，请见[README.old.md](./README.old.md)文件说明。
